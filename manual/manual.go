@@ -32,6 +32,8 @@ import "net/http"
  *
  */
 
+var is_print bool = false
+
 func main() {
 	fmt.Println("Hello, World!")
 	os_args()
@@ -161,8 +163,9 @@ func image_gif() {
 		anim.Image = append(anim.Image, img)
 	}
 
-	// Uncomment follow line will print gif to Stdout
-	// gif.EncodeAll(os.Stdout, &anim)
+	if is_print {
+		gif.EncodeAll(os.Stdout, &anim)
+	}
 }
 
 func net_http_url_request() {
@@ -183,7 +186,8 @@ func net_http_url_request() {
 		os.Exit(1)
 	}
 
-	// Uncomment follow line will print http body to Stdout
-	// fmt.Printf("%s", b)
+	if is_print {
+		fmt.Printf("%s", b)
+	}
 }
 
