@@ -15,6 +15,8 @@ import "net/http"
 import "time"
 import "log"
 import "sync"
+import "flag"
+import "bytes"
 
 /* import ("fmt" "os") */
 
@@ -37,7 +39,97 @@ import "sync"
  *     between different goruntine. [go function] will create one new goruntime and then
  *     execution the function. when go function try to access channel in one function
  *     execution time, the channel need to handle the critical section itself.
+ * 16. Pointer is available, but cannot do any operations on pointers.
+ * 17. go doc http.ListenAndServe for local go manual.
+ * 18. Symbol in package with beginning letter upper will be exported.
+ * 19. No uninitialized var in go.
+ * 20. Simple variable declartion := is available in function body.
+ * 21. Agnist to = is assignments, := is for declarations.
+ * 22. Point type *int, *float32.
+ * 23. Return the pointer to local variable is valid.
+ * 24. var p *int, *p++ will not change p, just *p = *p + 1
+ * 25. Build-in function new(T) will create a var with type T, and return the pointer
+ *     to this type. This is no diffence with declarations.
+ * 26. Function args and return values are local variables.
+ * 27. Function all like foo(a, b, c,) is valid.
+ * 28. Go compiler will decide when to locate variable, heap or stack.
+ * 29. Multi-variable assignment i, j = j, i is valid.
+ * 30. Type cast T(x), only valid if they have the same low_level_type or pointers.
+ * 31. Each package is one namespace, and each package contains many source files.
+ *     Almost only one file contains the package comments(descriptions).
+ * 32. One init function of package will be called when package initialize, this
+ *     init function cannot be call and reference.
+ * 33. Use simple declarations on the same name variable will cover the other variables.
+ * 34. And Not ops, &^ (y AND (NOT x)), ^ on single ops means ~.
+ * 35. Build-in function len return int type.
+ * 36. && has higher priority to ||.
+ * 37. String can be connected by +, and compared by == < >.
+ * 38. String cannot be modified.
+ * 39. String and byte slice can convert to each other.
+ * 40. Build-in len cap real imag complex unsaft.Sizeof will compute at compiling time,
+ *     and it will return const value.
+ * 41. Const generator, itoa.
+ * 42. Typeless const, if const has no clear type, go will provide at least 256-bits precision.
+ * 43. If initialization with typeless const, there will be some implicit rules. Like typeless
+ *     const will be treated as int, as well as float64 and complex128.
  *
+ */
+
+/*
+ * Keyword
+ *     break case   chan   const  continue default defer     else fallthrough
+ *     for   func   go     goto   if       import  interface map  package
+ *     range return select struct switch   type    var
+ *
+ * Pre-defined
+ *     true    false   iota      nil
+ *     int     int8    int16     int32      int64
+ *     uint    uint8   uint16    uint32     uint64  uintptr
+ *     float32 float64 complex64 complex128
+ *     bool    byte    rune      string     error
+ *     make    len     cap       new        append  copy    close delete
+ *     complex real    imag      panic      recover
+ *
+ * Declaration
+ *     var const type func
+ *     func func_name(arg list) return list {
+ *     }
+ *     func (t T) func_name() string {
+ *     }
+ *     That indicate the func_name is for Type T, t.func_name.
+ *     var var_name type = expression
+ *
+ * New type
+ *     type type_name low_level_type
+ *     type Celsius float64, now type Celsius is typedef to float64
+ *     type Fahren  float64, now type Fahren  is typedef to float64
+ *     NOTE: the type Celsius and Fahren is not the same type and cannot be compared.
+ *
+ * Data types
+ *     basic, hybird, reference and interface.
+ *     hybird    - array, struct
+ *     reference - pointer, slice, dictionary, function, pipeline
+ *
+ * Const generator
+ *     Sunday to Saturday will be initialized from 0 - 6.
+ *     type weekday int
+ *     const (
+ *         Sunday weekday = itoa
+ *         Monday
+ *         Tuesday
+ *         Wednesday
+ *         Thurday
+ *         Friday
+ *         Saturday
+ *     )
+ */
+
+/*
+ * STRUCTURE(new type):
+ * type Point struct {
+ * 	x, y int
+ * }
+ * var p Point
  */
 
 var is_print bool = false
@@ -58,6 +150,9 @@ func main() {
 	net_http_url_request()
 	net_http_url_go_runtine()
 	// net_web_server()
+
+	flag_parser()
+	print_valist_reuse()
 }
 
 func os_args() {
@@ -259,5 +354,59 @@ func web_server_handler (w http.ResponseWriter, r *http.Request) {
 func net_web_server() {
 	http.HandleFunc("/", web_server_handler)
 	log.Fatal(http.ListenAndServe("localhost:8888", nil))
+}
+
+func ftoc(f float64) float64 {
+	return (f - 32) * 5 / 9;
+}
+
+func flag_parser() {
+	/* name default-value descriptor, and flag return pointers */
+	var n = flag.Bool("n", false, "omit trailing newline")
+	var sep = flag.String("s", " ", "separator")
+	flag.Parse()
+
+	/* flag.Args return slice of string for all args */
+	if is_print {
+		fmt.Print(strings.Join(flag.Args(), *sep))
+	}
+
+	if !*n && is_print {
+		fmt.Println()
+	}
+}
+
+func print_valist_reuse() {
+	i := 0666
+	if is_print {
+		/* [1] tell the Printf to reuse the first arg i */
+		fmt.Printf("%d %[1]x %[1]X\n", i)
+	}
+}
+
+func basename(s string) string {
+	slash := strings.LastIndex(s, "/")
+	s = s[slash + 1:]
+
+	if dot := strings.LastIndex(s, "."); dot >= 0 {
+		s = s[:dot]
+	}
+
+	return s;
+}
+
+func intToString(values []int) string {
+	var buf bytes.Buffer
+	buf.WriteByte('[')
+
+	for i, v := range values {
+		if i > 0 {
+			buf.WriteString(", ")
+		}
+		fmt.Fprintf(&buf, "%d", v)
+	}
+
+	buf.WriteByte(']')
+	return buf.String()
 }
 
