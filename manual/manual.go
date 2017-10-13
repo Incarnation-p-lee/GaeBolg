@@ -72,6 +72,15 @@ import "bytes"
  * 42. Typeless const, if const has no clear type, go will provide at least 256-bits precision.
  * 43. If initialization with typeless const, there will be some implicit rules. Like typeless
  *     const will be treated as int, as well as float64 and complex128.
+ * 44. For complicated data, there are array, slice, map, struct.
+ * 45. Go will not convert array args to the pointer of the array when function calls.
+ * 46. Slice is somewhat like an array without const lenght, []T, array is [L]T. Slice always
+ *     contains 3 parts data, pointer, length and capacity.
+ * 47. Passing slice to function as args is just pass a alias of slice, or copy one slice also
+ *     just create one alias. Different to array, slice cannot be compared, only nil is valid.
+ * 48. Build-in make able to create slice, make([]T, len, cap)
+ * 49. Build-in append used to append new element to slice.
+ * 50. Map is one reference to hash table, key should be compared.
  *
  */
 
@@ -122,6 +131,18 @@ import "bytes"
  *         Friday
  *         Saturday
  *     )
+ *
+ * Array, slice, map and struct
+ *     [...] will count the size on initialization.
+ *     var q [...]int = {1, 2, 3}
+ *     var q [...]int = {0: 1, 1: 2, 2: 3}
+ *
+ * Map
+ *     key -> value, key must be compared, value not.
+ *     args := make(map[string]int)
+ *     delete(map, key)
+ *     the element of map cannot be referenced, like &args["Tom"]
+ *     The iteration on map is unstable.
  */
 
 /*
@@ -408,5 +429,57 @@ func intToString(values []int) string {
 
 	buf.WriteByte(']')
 	return buf.String()
+}
+
+func appendInt(x []int, y int) []int {
+	var z []int
+	zlen := len(x) + 1
+
+	if zlen <= cap(x) {
+		z = x[:zlen] /* here z and x will share the low level data */
+	} else {
+		zcap := zlen
+
+		if zcap < 2 * len(x) {
+			zcap = 2 * len(x)
+		}
+
+		z = make([]int, zlen, zcap)
+		copy(z, x)
+	}
+
+	z[len(x)] = y
+	return z
+}
+
+func NonEmpty(str []string) []string {
+	i := 0
+
+	for _, s := range str {
+		/*
+                 * reuse the memory of given string slice, will overwrite low
+                 * level memory.
+                 */
+		if s != "" {
+			str[i] = s;
+			i++;
+		}
+	}
+
+	return str[:i];
+}
+
+func MapEqual(x, y map[string]int) bool {
+	if len(x) != len(y) {
+		return false
+	}
+
+	for k, xv := range x {
+		if yv, ok := y[k]; !ok || yv != xv {
+			return false
+		}
+	}
+
+	return true
 }
 
