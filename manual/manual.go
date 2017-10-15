@@ -17,6 +17,7 @@ import "log"
 import "sync"
 import "flag"
 import "bytes"
+import "sort"
 
 /* import ("fmt" "os") */
 
@@ -81,7 +82,34 @@ import "bytes"
  * 48. Build-in make able to create slice, make([]T, len, cap)
  * 49. Build-in append used to append new element to slice.
  * 50. Map is one reference to hash table, key should be compared.
- *
+ * 51. Struct member begin with upper letter will be exported.
+ * 52. Struct can be initialized with signature, anim := git.GIF{LoopCountL: nf}, only exported
+ *     member can use signature initialization.
+ * 53. All function call will pass the copy of arguments, so pass the pointer of structure may
+ *     be good for performance.
+ * 54. If all member of struct is comparable, struct is comparable.
+ * 55. Anonymous member of struct is only declared data type without a name. The language just
+ *     give a default name of this member and ignore it when access. This always called struct
+ *     embedded.
+ * 56. Text/template can used to generate complicated text, as well as html/templete
+ * 57. Function without body means it not implemented by Go.
+ * 58. Go use dynamic stack for function call, no stack overflow.
+ * 59. Function can return multi-values, and bare return, but not recommanded, as Go will
+ *     initialize return value to zero when function begins.
+ * 60. Build-in type error is a interface, and cannot be treated as exception.
+ * 61. Function values, like other types, function also got values, or function pointer, which
+ *     cannot be compared.
+ * 62. Anonymous function is supported, for this anonymous function can access the outer
+ *     function variables. Also function values are reference types. When anonymous function
+ *     touch the local variable in caller function, it will save the address of that variable.
+ * 63. Functions also support variadic parameters.
+ * 64. Prefix defer when call functions. In one function with a statement defer, it will be 
+ *     executed after all function finished. If function has more than one defer, it first
+ *     one will be the last execution one. Defer always for resource open/close, connect/disconnect
+ *     lock and unlock.
+ * 65. Runtime error can use panic, will exit current goruntine and print log. Also panic can be
+ *     used as assert, but should be fatal error. If deferred function invoked build-in function
+ *     recover, recover will occurs from panic and return panic value, instead of exit.
  */
 
 /*
@@ -143,14 +171,21 @@ import "bytes"
  *     delete(map, key)
  *     the element of map cannot be referenced, like &args["Tom"]
  *     The iteration on map is unstable.
- */
-
-/*
- * STRUCTURE(new type):
- * type Point struct {
- * 	x, y int
- * }
- * var p Point
+ *
+ * Struct
+ *     type Point struct {
+ *         x, y int
+ *     }
+ *     Both instance and pointer use . to access members.
+ *
+ * Function
+ *     func sum(vals ... int) int {
+ *     }
+ *     Which means it will accept any more than 1 args, the vals will treat as
+ *     slice. If us slice as args. The function call should be
+ *     values := int[]{1, 2, 3, 4}
+ *     sum(values...)
+ *
  */
 
 var is_print bool = false
@@ -174,6 +209,9 @@ func main() {
 
 	flag_parser()
 	print_valist_reuse()
+	structBehavior()
+	structEmbedded()
+	fmt.Printf("pli28 panic %d\n", noReturn())
 }
 
 func os_args() {
@@ -481,5 +519,107 @@ func MapEqual(x, y map[string]int) bool {
 	}
 
 	return true
+}
+
+type Point struct {
+	x, y int
+	Name string
+}
+
+type Wheel struct {
+	Point
+	length int
+}
+
+func structBehavior() {
+	p := Point{0, 1, "null"}
+	fmt.Println(p)
+	/*
+         * Another package cannot touch current package struct Point's internal
+         * member x, y. They can only see Name here.
+         */
+}
+
+func structEmbedded() {
+	w := Wheel{Point{x:3, y:4, Name:"pli28"}, 20}
+
+	w.x += w.y
+	w.y -= 2
+	fmt.Println(w)
+}
+
+func handleEOF() {
+	in := bufio.NewReader(os.Stdin)
+	for {
+		r, _, err := in.ReadRune()
+		if err == io.EOF {
+			break
+		} else if err != nil {
+			fmt.Errorf("Read failed %v\n", err)
+			break
+		}
+		fmt.Println(r)
+	}
+}
+
+func squares() func() int {
+	var x int
+	/*
+	 * Anonymous function will referece to variable x, foreach function call
+	 * to anonymous function, it will keep the reference to seuares function
+	 * variable x. For all, if there is a reference to anonymous function,
+	 * the memory stack/hep of function squares will be keepped, so the
+	 * anonymous function can access the variable and resource. Always, we 
+	 * call it closure.
+	 */
+	return func() int {
+		x++
+		return x * x
+	}
+}
+
+func topoSort(m map[string][]string) []string {
+	var order []string
+	seen := make(map[string]bool)
+	var visitAll func(items []string)
+	visitAll = func(items []string) {
+		for _, item := range items {
+			if !seen[item] {
+				seen[item] = true
+				visitAll(m[item])
+				order = append(order, item)
+			}
+		}
+	}
+
+	var keys []string
+	for key := range m {
+		keys = append(keys, key)
+	}
+
+	sort.Strings(keys)
+	visitAll(keys)
+	return order
+}
+
+func deferClose(filename string) ([]byte, error) {
+	f, err := os.Open(filename)
+
+	if err != nil {
+		return nil, err
+	}
+
+	defer f.Close()
+	return ioutil.ReadAll(f)
+}
+
+func noReturn() (out int) {
+	defer func() {
+		if p := recover(); p != nil {
+			out = p.(int)
+		}
+	}()
+
+	panic(3)
 }
 
