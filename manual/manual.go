@@ -110,6 +110,8 @@ import "sort"
  * 65. Runtime error can use panic, will exit current goruntine and print log. Also panic can be
  *     used as assert, but should be fatal error. If deferred function invoked build-in function
  *     recover, recover will occurs from panic and return panic value, instead of exit.
+ * 66. Embedded struct method can also be accessed by outlayer struct even if it do not implemented.
+ * 67. Method also has value, like function. Page 222.
  */
 
 /*
@@ -185,6 +187,24 @@ import "sort"
  *     slice. If us slice as args. The function call should be
  *     values := int[]{1, 2, 3, 4}
  *     sum(values...)
+ *
+ * Method
+ *     type Point struct {
+ *         x, y float64
+ *     }
+ *     func (p Point) Distance(q Point) float 64 {
+ *         return xxx
+ *     }
+ *     func (p *Point) Distance(q Point) float 64 {
+ *         return xxx
+ *     }
+ *     The p Point called Receiver.
+ *     The method of embedded struct also embedded, the type ColoredPoint can
+ *     also be the receiver of type Point.
+ *     type ColoredPoint struct {
+ *         Point
+ *         Color color.RGBA
+ *     }
  *
  */
 
@@ -621,5 +641,5 @@ func noReturn() (out int) {
 	}()
 
 	panic(3)
-}
+
 
