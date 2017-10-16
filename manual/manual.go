@@ -112,6 +112,7 @@ import "sort"
  *     recover, recover will occurs from panic and return panic value, instead of exit.
  * 66. Embedded struct method can also be accessed by outlayer struct even if it do not implemented.
  * 67. Method also has value, like function. Page 222.
+ * 68. Packaging means method cannot be touched by invoker.
  */
 
 /*
@@ -641,5 +642,53 @@ func noReturn() (out int) {
 	}()
 
 	panic(3)
+}
+
+type FPoint struct {
+	X, Y float64
+}
+
+type Path []FPoint
+
+func (p FPoint) Add(q FPoint) FPoint {
+	return FPoint{p.X + q.X, p.Y + q.Y}
+}
+
+func (p FPoint) Sub(q FPoint) FPoint {
+	return FPoint{p.X - q.X, p.Y - q.Y}
+}
+
+func (path Path) methodValue(offset FPoint, is_add bool) {
+	var op func(p, q FPoint) FPoint
+
+	if is_add {
+		op = FPoint.Add
+	} else {
+		op = FPoint.Sub
+	}
+
+	for i := range path {
+		path[i] = op(path[i], offset)
+	}
+}
+
+type IntSet struct {
+	words []uint64
+}
+
+func (s *IntSet) Has(x int) bool {
+	word, bit := x / 64, uint(x % 64)
+	return word < len(s.words) && (s.words[word] & (1 << bit)) != 0
+}
+
+func (s *IntSet) Add(x int) {
+	word, bit := x / 64, uint(x % 64)
+
+	for word >= len(s.words) {
+		s.words = append(s.words, 0)
+	}
+
+	s.words[word] |= 1 << bit
+}
 
 
