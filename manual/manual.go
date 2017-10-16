@@ -113,6 +113,7 @@ import "sort"
  * 66. Embedded struct method can also be accessed by outlayer struct even if it do not implemented.
  * 67. Method also has value, like function. Page 222.
  * 68. Packaging means method cannot be touched by invoker.
+ * 69. Interface can also be embedded, interface is null type, or any type, which contains no method.
  */
 
 /*
@@ -207,6 +208,25 @@ import "sort"
  *         Color color.RGBA
  *     }
  *
+ * Interface
+ *     io.Writer defines the rule of caller and callee, which makes any type implemented
+ *     io.Writer on Fprintf works well.
+ *     type Writer interface {
+ *         Write(p []byte)(n int, err error)
+ *     }
+ *     func Fprintf(w io.Writer, format string, args ... interface{}) (int, err)
+ *     func Printf(format string, args ... interface{}) (int, err) {
+ *         return Fprintf(os.Stdout, format, args ...)
+ *     }
+ *     func Sprintf(format string, args ... interface{}) string {
+ *         var buf bytes.Buffer
+ *         Fprintf(&buf, format, args...)
+ *         return buf.String()
+ *     }
+ *     var w io.Writer
+ *     w = os.Stdout
+ *     w = new(bytes.Buffer)
+ *     w = time.Second       // Compiler error, time.Duration lack Writer method.
  */
 
 var is_print bool = false
