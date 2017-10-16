@@ -114,6 +114,30 @@ import "sort"
  * 67. Method also has value, like function. Page 222.
  * 68. Packaging means method cannot be touched by invoker.
  * 69. Interface can also be embedded, interface is null type, or any type, which contains no method.
+ * 70. Interface also has values, one type and its value. For example, var w io.Writer.
+ *     var w io.Writer
+ *     +-----+
+ *     | nil | <- type
+ *     +-----+
+ *     | nil | <- value
+ *     +-----+
+ *     w = os.Stdout
+ *     +---------------------+
+ *     | *os.File            | <- type
+ *     +---------------------+
+ *     | Pointer to os.File  | <- value
+ *     +---------------------+
+ *     So interface value always called dynamic type and its value, value also can be type descriptor.
+ *     And value can be any big.
+ *     var x interface{} = time.Now()
+ *     +---------------------+
+ *     | time.Time           | <- type
+ *     +---------------------+
+ *     | sec:  xxxxxxxxxxxx  |
+ *     | usec: xxxxxxxxxxxx  | <- value
+ *     | loc:  "UTC"         |
+ *     +---------------------+
+ *     Page 255.
  */
 
 /*
