@@ -137,7 +137,14 @@ import "sort"
  *     | usec: xxxxxxxxxxxx  | <- value
  *     | loc:  "UTC"         |
  *     +---------------------+
- *     Page 255.
+ * 71. Type assert, which is for interface value, looks like x.(T). T is type name.
+ *     If T is not interface, it will return x's value on success, or panic
+ *     If T is interface, it will check type T will fit type x, and return the interface
+ *     with same type and value. It will change the interface func set.
+ *     If interface type assert with 2 return value, it will no panic if failed.
+ *     var w io.Writer = os.Stdout
+ *     f, ok := w.(*os.File)
+ *     Page 280.
  */
 
 /*
@@ -735,4 +742,20 @@ func (s *IntSet) Add(x int) {
 	s.words[word] |= 1 << bit
 }
 
+func writeString(w io.Writer, s string) (n int, err error) {
+	type stringWriter interface {
+		WriteString(string)(n int, err error)
+	}
+
+	if sw, ok := w.(stringWriter); ok {
+		/*
+		 * use type assert to check if w implmented no extra memory
+		 * WriteString.
+		 */
+		return sw.WriteString(s)
+	}
+
+	/* []byte() will allocate another chunk of memory */
+	return w.Write([]byte(s))
+}
 
