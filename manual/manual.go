@@ -144,7 +144,17 @@ import "sort"
  *     If interface type assert with 2 return value, it will no panic if failed.
  *     var w io.Writer = os.Stdout
  *     f, ok := w.(*os.File)
- *     Page 280.
+ * 72. For interface hold variables, one switch case can avoiding if-else if-else if
+ *     switch x.(type) {
+ *         case nil:
+ *         case int, uint:
+ *         case bool:
+ *         case string:
+ *         default:
+ *     }
+ * 73. If more than 2 types implement interface makes interface valuable, in case there
+ *     must be someting can be abstracted and give interface higher level meanings.
+ *     
  */
 
 /*
