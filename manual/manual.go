@@ -185,7 +185,7 @@ import "sort"
  *     chan<- int means a channel only for send.
  *     <-chan int means a channel only for receive.
  *     The bufferred channel buffer looks like a queue.
- *     Page 312
+ *     After chan close, we can use range to touch the pending data.
  */
 
 /*
@@ -326,6 +326,7 @@ func main() {
 	structEmbedded()
 	fmt.Printf("pli28 panic %d\n", noReturn())
 	goruntine()
+	channelOnClose()
 }
 
 func os_args() {
@@ -803,7 +804,7 @@ func writeString(w io.Writer, s string) (n int, err error) {
 
 func goruntine() {
 	go spinner(100 * time.Millisecond)
-	const n = 45
+	const n = 20
 	fib := fibnumber(n)
 	fmt.Println(fib)
 }
@@ -823,5 +824,34 @@ func fibnumber(x int) int {
 	}
 
 	return fibnumber(x - 1) + fibnumber(x - 2)
+}
+
+func channelOnClose() {
+	data := []int{1, 2, 3, 4, 5, 6, 7, 8, 9, 10}
+	out := make(chan int)
+	var wg sync.WaitGroup
+
+	for _, v := range data {
+		wg.Add(1)
+
+		go func(d int) {
+			out <- d
+			defer wg.Done()
+		}(v)
+	}
+
+	go func() {
+		// fmt.Printf("Waiting goruntimes")
+		wg.Wait()
+		close(out)
+	}()
+
+	/* after chan close the data still here */
+	var total int
+	for v := range out {
+		total += v
+	}
+
+	fmt.Println(total)
 }
 
