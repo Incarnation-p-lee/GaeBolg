@@ -154,7 +154,38 @@ import "sort"
  *     }
  * 73. If more than 2 types implement interface makes interface valuable, in case there
  *     must be someting can be abstracted and give interface higher level meanings.
- *     
+ * 74. Gorounine is one concurrent execution unit, when main goruntime returns, all sub goruntime will
+ *     be interrupt and exit.
+ *     go func_call()
+ * 75. Channel is the commnunication between goruntines. A chan has one send/recevie type.
+ *     ch := make(chan int, capacity), as ch is a pointer like value. Channel has 2 operations, send
+ *     and receive.
+ *     ch <- x     // send to chan
+ *     x = <- ch   // recevie from chan
+ *     <- ch       // recevie can be discard
+ *     chan also can be closed, then any send/recevie will result in panic.
+ *     channel without buf send data will block, until other goruninte receive.
+ *     receive also can return 2 values, (v, ok), so we can check if channel is closed.
+ *     channel can be ranged
+ *     naturals := make(chan int)
+ *     squares := make(chan int)
+ *     go func() {
+ *         for x := 0; x < 100; x++ {
+ *             naturals <- x
+ *         }
+ *         close(naturals)
+ *     }()
+ *
+ *     go func() [
+ *         for x := range naturals [
+ *             squares <- x * x
+ *         }
+ *         close(squares)
+ *     }()
+ *     chan<- int means a channel only for send.
+ *     <-chan int means a channel only for receive.
+ *     The bufferred channel buffer looks like a queue.
+ *     Page 312
  */
 
 /*
@@ -294,6 +325,7 @@ func main() {
 	structBehavior()
 	structEmbedded()
 	fmt.Printf("pli28 panic %d\n", noReturn())
+	goruntine()
 }
 
 func os_args() {
@@ -767,5 +799,29 @@ func writeString(w io.Writer, s string) (n int, err error) {
 
 	/* []byte() will allocate another chunk of memory */
 	return w.Write([]byte(s))
+}
+
+func goruntine() {
+	go spinner(100 * time.Millisecond)
+	const n = 45
+	fib := fibnumber(n)
+	fmt.Println(fib)
+}
+
+func spinner(delay time.Duration) {
+	for {
+		for _, r := range `-\|/` {
+			fmt.Printf("\r%c", r)
+			time.Sleep(delay)
+		}
+	}
+}
+
+func fibnumber(x int) int {
+	if x < 2 {
+		return x
+	}
+
+	return fibnumber(x - 1) + fibnumber(x - 2)
 }
 
