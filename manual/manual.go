@@ -186,6 +186,23 @@ import "sort"
  *     <-chan int means a channel only for receive.
  *     The bufferred channel buffer looks like a queue.
  *     After chan close, we can use range to touch the pending data.
+ * 76. Select for multi channel trigger, mostly for sync with multi channels.
+ *     Any of select case triggerred will end the blocking of select statement.
+ *     If chan abort has value it will receive or do nothing, the following recevie
+ *     will not block. Default means if for now other cases are not ready, then execute default.
+ *     select {
+ *         case <- abort:
+ *             fmt.Println
+ *         default:
+ *             // do nothing
+ *     }
+ * 77. Sync.Once, can be consider as one mutex and bool for initializer complete or not.
+ *     var loadIconOnce sync.Once
+ *     var icons map[string]image.Image
+ *     func Icon(name string) image.Image {
+ *          loadIconOnice.Do(loadIcons)
+ *          return icons[name]
+ *     }
  */
 
 /*
