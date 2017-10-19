@@ -203,6 +203,11 @@ import "sort"
  *          loadIconOnice.Do(loadIcons)
  *          return icons[name]
  *     }
+ * 78. Os thread may hold one stack for each thread, but goruntine stack begins with 2K
+ *     at first, and automatically increase at most 1GB. Also go has it own scheduler,
+ *     some function like sleep, mutex will be scheduled. Go use m:n scheduler, means
+ *     n thread for m goruntine. These sleep and mutex will not trap to kernel.
+ * 79. Goruntine has no id.
  */
 
 /*
