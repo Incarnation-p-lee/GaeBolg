@@ -208,6 +208,18 @@ import "sort"
  *     some function like sleep, mutex will be scheduled. Go use m:n scheduler, means
  *     n thread for m goruntine. These sleep and mutex will not trap to kernel.
  * 79. Goruntine has no id.
+ * 80. Package name is global unique string, package default name used as the package identifier.
+ *         import "math/rand"
+ *     var r = rand.Int()
+ *     source file name with suffix test.go will be built by go test.
+ *     Also, package can be renamed for conflict, only works in file scope.
+ *         import "crypto/rand"
+ *         import mrand "math/rand"
+ *     And anonymous package import is allowed.
+ *         import _ "math/rand"
+ * 81. GOPATH specific the current go work dir, GOROOT for go install dir. For convention,
+ *     one package, one directory.
+ * 
  */
 
 /*
