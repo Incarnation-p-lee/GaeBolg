@@ -9,5 +9,6 @@ func main() {
 	pbms.LetterCombination()
 	pbms.GenerateParenthesis()
 	pbms.CombinationSum()
+	pbms.CombinationSum2()
 }
 
