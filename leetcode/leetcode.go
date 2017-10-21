@@ -5,7 +5,9 @@ import pbms "./problems"
 
 func main() {
 	fmt.Println("Hello, Leetcode!")
+
 	pbms.LetterCombination()
 	pbms.GenerateParenthesis()
+	pbms.CombinationSum()
 }
 
