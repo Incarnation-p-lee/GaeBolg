@@ -11,5 +11,6 @@ func main() {
 	pbms.CombinationSum()
 	pbms.CombinationSum2()
 	pbms.Permute()
+	pbms.PermuteUnique()
 }
 
