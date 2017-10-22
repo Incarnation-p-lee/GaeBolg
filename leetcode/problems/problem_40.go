@@ -16,7 +16,7 @@ func combinationDfs2(input []int, idx int, t int, buf *[]int, out *[][]int) {
 		copy(found, *buf)
 		*out = append(*out, found)
 	} else {
-		for j := idx; j < len(input); j++ {		
+		for j := idx; j < len(input); j++ {
 			if j > idx && input[j] == input[j - 1] {
 				continue
 			}
@@ -27,10 +27,10 @@ func combinationDfs2(input []int, idx int, t int, buf *[]int, out *[][]int) {
 				break
 			}
 			
-			(*buf) = append((*buf), d)	  /* push d */
+			(*buf) = append((*buf), d) /* push d */
 			combinationDfs2(input, j + 1, t - d, buf, out)
 			(*buf) = (*buf)[:len(*buf) - 1] /* pod */
-		}		 
+		}
 	}
 }
 

@@ -10,5 +10,6 @@ func main() {
 	pbms.GenerateParenthesis()
 	pbms.CombinationSum()
 	pbms.CombinationSum2()
+	pbms.Permute()
 }
 
