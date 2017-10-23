@@ -8,6 +8,7 @@ func CombinationSum() {
 	candidates := []int{2, 3, 6, 7}
 	target := 7
 
+	fmt.Printf("<39> ")
 	combinationSum(candidates, target)
 }
 

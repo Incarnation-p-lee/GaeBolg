@@ -7,6 +7,7 @@ func CombinationSum2() {
 	candidates := []int{1, 1, 1, 2, 5, 7, 6, 6, 6, 10} 
 	target := 12
 
+	fmt.Printf("<40> ")
 	combinationSum2(candidates, target)
 }
 

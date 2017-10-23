@@ -28,5 +28,7 @@ func main() {
 	pbms.Permute()
 	pbms.PermuteUnique()
 	pbms.GetPermutation()
+
+	pbms.Combine()
 }
 

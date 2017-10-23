@@ -5,6 +5,7 @@ import "fmt"
 /* Generate Parentheses */
 
 func GenerateParenthesis() {
+	fmt.Printf("<22> ")
 	generateParenthesis(4)
 }
 

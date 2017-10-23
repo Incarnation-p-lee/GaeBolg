@@ -37,6 +37,7 @@ func permute(nums []int) [][]int {
 func Permute() {
 	nums := []int {1, 2, 3}
  
+	fmt.Printf("<46> ")
 	permute(nums)
 }
 

@@ -55,6 +55,7 @@ func GetPermutation() {
 	n := 6
 	k := 23
 
+	fmt.Printf("<60> ")
 	getPermutation(n, k)
 }
 
