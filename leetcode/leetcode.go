@@ -30,5 +30,6 @@ func main() {
 	pbms.GetPermutation()
 
 	pbms.Combine()
+	pbms.Subsets()
 }
 
