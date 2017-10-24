@@ -31,5 +31,6 @@ func main() {
 
 	pbms.Combine()
 	pbms.Subsets()
+	pbms.Exist()
 }
 
