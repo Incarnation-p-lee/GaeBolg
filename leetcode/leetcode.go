@@ -32,5 +32,6 @@ func main() {
 	pbms.Combine()
 	pbms.Subsets()
 	pbms.Exist()
+	pbms.GrayCode()
 }
 
