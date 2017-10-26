@@ -4,8 +4,8 @@ import "fmt"
 
 /* Problem 17. Letter Combinations of a Phone Number */
 func LetterCombination() {
-	fmt.Printf("<17> ")
-	letterCombination("239")
+	fmt.Printf("<017> ")
+	fmt.Println(letterCombination("239"))
 }
 
 func letterCombination(digits string) []string {
@@ -36,8 +36,6 @@ func letterCombination(digits string) []string {
 			tmp = nil
 		}
 	}
-
-	fmt.Println(combin)
 
 	return combin
 }

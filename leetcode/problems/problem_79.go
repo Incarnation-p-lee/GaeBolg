@@ -96,7 +96,7 @@ func Exist() {
 		{'A','D','E','E'},
 	}
 
-	fmt.Printf("<79> ")
+	fmt.Printf("<079> ")
 	fmt.Println(exist(board, "ABCESEEEFS"))
 }
 

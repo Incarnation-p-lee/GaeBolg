@@ -39,15 +39,13 @@ func permuteUnique(nums []int) [][]int {
     
 	permuteUniqueDfs(nums, &buf, &out, 0, visit)
 
-	fmt.Println(out)
-
 	return out
 }
 
 func PermuteUnique() {
 	nums := []int{3, 3, 0, 3, 0}
 
-	fmt.Printf("<47> ")
-	permuteUnique(nums)    
+	fmt.Printf("<047> ")
+	fmt.Println(permuteUnique(nums))
 }
 

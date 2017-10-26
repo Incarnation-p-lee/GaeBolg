@@ -5,8 +5,8 @@ import "fmt"
 /* Generate Parentheses */
 
 func GenerateParenthesis() {
-	fmt.Printf("<22> ")
-	generateParenthesis(4)
+	fmt.Printf("<022> ")
+	fmt.Println(generateParenthesis(4))
 }
 
 /*
@@ -38,8 +38,6 @@ func generateParenthesis(n int) []string {
 	}
 
 	generateDfs(0, 0, n, "", &out)
-
-	fmt.Println(out)
 
 	return out;
 }

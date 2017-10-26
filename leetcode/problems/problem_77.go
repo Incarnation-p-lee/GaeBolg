@@ -29,8 +29,6 @@ func combine(n int, k int) [][]int {
 
 	combineDfs(data, 0, k, &buf, &out)
 
-	fmt.Println(out)
-
 	return out
 }
 
@@ -39,6 +37,6 @@ func Combine() {
 	k := 2
 
 	fmt.Printf("<77> ")
-	combine(n, k)
+	fmt.Println(combine(n, k))
 }
 

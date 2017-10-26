@@ -28,7 +28,7 @@ func grayCode(n int) []int {
 func GrayCode() {
 	n := 2
 
-	fmt.Printf("<89> ")
+	fmt.Printf("<089> ")
 	fmt.Println(grayCode(n))
 }
 

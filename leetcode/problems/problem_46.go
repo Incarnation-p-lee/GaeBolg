@@ -29,8 +29,6 @@ func permute(nums []int) [][]int {
 
 	permuteDfs(nums, 0, &buf, &out, visit)
 
-	fmt.Println(out)
-
 	return out
 }
 
@@ -38,6 +36,6 @@ func Permute() {
 	nums := []int {1, 2, 3}
  
 	fmt.Printf("<46> ")
-	permute(nums)
+	fmt.Println(permute(nums))
 }
 

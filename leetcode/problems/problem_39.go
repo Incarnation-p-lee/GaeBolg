@@ -8,8 +8,8 @@ func CombinationSum() {
 	candidates := []int{2, 3, 6, 7}
 	target := 7
 
-	fmt.Printf("<39> ")
-	combinationSum(candidates, target)
+	fmt.Printf("<039> ")
+	fmt.Println(combinationSum(candidates, target))
 }
 
 func combinationDfs(in []int, i int, t int, buf *[]int, out *[][]int) {
@@ -39,8 +39,6 @@ func combinationSum(candidates []int, target int) [][]int {
 	sort.Ints(candidates)
 
 	combinationDfs(candidates, 0, target, &buf, &out)
-
-	fmt.Println(out)
 
 	return out
 }

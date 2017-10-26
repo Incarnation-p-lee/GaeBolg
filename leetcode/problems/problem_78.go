@@ -44,18 +44,16 @@ func subsets2(nums []int) [][]int {
 
 	subsets2Dfs(nums, 0, &buf, &out)
 
-	fmt.Println(out)
-
 	return out
 }
 
 func Subsets() {
 	data := []int{1, 2, 3}
 
-	fmt.Printf("<78> ")
-	subsets(data)
+	fmt.Printf("<078> ")
+	fmt.Println(subsets(data))
 
-	fmt.Printf("<78> ")
-    subsets2(data)
+	fmt.Printf("<078> ")
+    fmt.Println(subsets2(data))
 }
 

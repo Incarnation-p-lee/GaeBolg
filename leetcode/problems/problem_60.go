@@ -45,8 +45,6 @@ func getPermutation(n int, k int) string {
 		s += strconv.Itoa(v)
 	}
 
-	fmt.Println(s)
-
 	return s
 }
 
@@ -56,6 +54,6 @@ func GetPermutation() {
 	k := 23
 
 	fmt.Printf("<60> ")
-	getPermutation(n, k)
+	fmt.Println(getPermutation(n, k))
 }
 

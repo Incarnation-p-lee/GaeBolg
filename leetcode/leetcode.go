@@ -33,5 +33,7 @@ func main() {
 	pbms.Subsets()
 	pbms.Exist()
 	pbms.GrayCode()
+	pbms.TwoSum()
+	pbms.AddTwoNumbers()
 }
 
