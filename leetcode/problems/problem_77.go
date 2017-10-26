@@ -36,7 +36,7 @@ func Combine() {
 	n := 4
 	k := 2
 
-	fmt.Printf("<77> ")
+	fmt.Printf("<077> ")
 	fmt.Println(combine(n, k))
 }
 

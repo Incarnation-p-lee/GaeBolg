@@ -53,7 +53,7 @@ func GetPermutation() {
 	n := 6
 	k := 23
 
-	fmt.Printf("<60> ")
+	fmt.Printf("<060> ")
 	fmt.Println(getPermutation(n, k))
 }
 

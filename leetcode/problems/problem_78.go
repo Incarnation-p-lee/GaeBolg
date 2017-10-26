@@ -19,8 +19,6 @@ func subsets(nums []int) [][]int {
 		}
 	}
 
-	fmt.Println(out)
-
 	return out
 }
 
