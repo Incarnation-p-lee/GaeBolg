@@ -36,5 +36,6 @@ func main() {
 	pbms.LengthOfLongestSubstring()
 	pbms.FindMedianSortedArrays()
 	pbms.RestoreIpAddresses()
+	pbms.IsValidBST()
 }
 
