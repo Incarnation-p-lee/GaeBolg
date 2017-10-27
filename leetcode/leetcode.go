@@ -33,5 +33,6 @@ func main() {
 	pbms.TwoSum()
 	pbms.AddTwoNumbers()
 	pbms.SubsetsWithDup()
+	pbms.LengthOfLongestSubstring()
 }
 
