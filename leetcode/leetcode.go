@@ -34,5 +34,6 @@ func main() {
 	pbms.AddTwoNumbers()
 	pbms.SubsetsWithDup()
 	pbms.LengthOfLongestSubstring()
+	pbms.FindMedianSortedArrays()
 }
 
