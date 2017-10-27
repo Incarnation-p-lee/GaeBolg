@@ -35,5 +35,6 @@ func main() {
 	pbms.SubsetsWithDup()
 	pbms.LengthOfLongestSubstring()
 	pbms.FindMedianSortedArrays()
+	pbms.RestoreIpAddresses()
 }
 
