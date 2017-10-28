@@ -37,5 +37,6 @@ func main() {
 	pbms.FindMedianSortedArrays()
 	pbms.RestoreIpAddresses()
 	pbms.IsValidBST()
+	pbms.RecoverTree()
 }
 
