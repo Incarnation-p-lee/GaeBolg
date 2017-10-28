@@ -38,5 +38,6 @@ func main() {
 	pbms.RestoreIpAddresses()
 	pbms.IsValidBST()
 	pbms.RecoverTree()
+	pbms.IsSameTree()
 }
 
