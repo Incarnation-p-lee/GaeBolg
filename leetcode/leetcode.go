@@ -43,5 +43,6 @@ func main() {
 	pbms.LevelOrder()
 	pbms.ZigzagLevelOrder()
 	pbms.MaxDepth()
+	pbms.BuildTree()
 }
 

@@ -52,7 +52,7 @@ func MaxDepth() {
 	t4.Left, t4.Right, t5.Left, t5.Right = nil, nil, nil, nil
 	t6.Left, t6.Right, t7.Left, t7.Right = nil, nil, nil, nil
 
-	fmt.Printf("<103> ")
+	fmt.Printf("<104> ")
 	fmt.Println(maxDepth(&t2)) 
 }
 
