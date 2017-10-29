@@ -42,5 +42,6 @@ func main() {
 	pbms.IsSymmetric()
 	pbms.LevelOrder()
 	pbms.ZigzagLevelOrder()
+	pbms.MaxDepth()
 }
 
