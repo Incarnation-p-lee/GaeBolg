@@ -39,5 +39,6 @@ func main() {
 	pbms.IsValidBST()
 	pbms.RecoverTree()
 	pbms.IsSameTree()
+	pbms.IsSymmetric()
 }
 
