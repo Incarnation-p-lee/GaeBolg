@@ -40,5 +40,6 @@ func main() {
 	pbms.RecoverTree()
 	pbms.IsSameTree()
 	pbms.IsSymmetric()
+	pbms.LevelOrder()
 }
 
