@@ -41,5 +41,6 @@ func main() {
 	pbms.IsSameTree()
 	pbms.IsSymmetric()
 	pbms.LevelOrder()
+	pbms.ZigzagLevelOrder()
 }
 
