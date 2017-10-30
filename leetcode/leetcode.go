@@ -46,5 +46,6 @@ func main() {
 	pbms.BuildTree()
 	pbms.BuildTree2()
 	pbms.LevelOrderBottom()
+	pbms.SortedArrayToBST()
 }
 
