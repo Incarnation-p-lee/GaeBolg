@@ -42,6 +42,6 @@ func BuildTree() {
 	iOrder := []int{1, 2, 3, 4, 5, 6}
 
 	fmt.Printf("<105> ")
-	fmt.Println(buildTree(pOrder, iOrder))
+	fmt.Printf("%v\n", buildTree(pOrder, iOrder))
 }
 
