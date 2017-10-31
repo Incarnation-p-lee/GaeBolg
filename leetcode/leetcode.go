@@ -47,5 +47,6 @@ func main() {
 	pbms.BuildTree2()
 	pbms.LevelOrderBottom()
 	pbms.SortedArrayToBST()
+	pbms.LongestPalindrome()
 }
 
