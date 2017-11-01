@@ -30,7 +30,7 @@ func sortedArrayToBST(nums []int) *TreeNode {
 func SortedArrayToBST() {
 	data := []int {1, 2, 3, 4, 5, 6, 9}
 
-	fmt.Printf("<108>")
+	fmt.Printf("<108> ")
 	fmt.Printf("%v\n", sortedArrayToBST(data))
 }
 

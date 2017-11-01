@@ -47,6 +47,11 @@ func main() {
 	pbms.BuildTree2()
 	pbms.LevelOrderBottom()
 	pbms.SortedArrayToBST()
+	pbms.SortedListToBST()
+	pbms.IsBalanced()
+	pbms.MinDepth()
+	pbms.HasPathSum()
+	pbms.PathSum()
 	pbms.LongestPalindrome()
 	pbms.Convert()
 }
