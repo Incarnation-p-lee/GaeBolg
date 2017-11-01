@@ -54,5 +54,7 @@ func main() {
 	pbms.PathSum()
 	pbms.LongestPalindrome()
 	pbms.Convert()
+	pbms.Reverse()
+	pbms.MyAtoi()
 }
 
