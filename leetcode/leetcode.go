@@ -48,5 +48,6 @@ func main() {
 	pbms.LevelOrderBottom()
 	pbms.SortedArrayToBST()
 	pbms.LongestPalindrome()
+	pbms.Convert()
 }
 
