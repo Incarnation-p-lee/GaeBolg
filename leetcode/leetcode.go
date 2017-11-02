@@ -58,5 +58,7 @@ func main() {
 	pbms.MyAtoi()
 	pbms.Flatten()
 	pbms.MaxPathSum()
+	pbms.LongestCommonPrefix()
+	pbms.ThreeSum()
 }
 
