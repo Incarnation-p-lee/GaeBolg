@@ -56,5 +56,7 @@ func main() {
 	pbms.Convert()
 	pbms.Reverse()
 	pbms.MyAtoi()
+	pbms.Flatten()
+	pbms.MaxPathSum()
 }
 
