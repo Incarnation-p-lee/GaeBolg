@@ -61,5 +61,10 @@ func main() {
 	pbms.LongestCommonPrefix()
 	pbms.ThreeSum()
 	pbms.FindLadders()
+	pbms.ThreeSumClosest()
+	pbms.FourSum()
+	pbms.RemoveNthFromEnd()
+	pbms.IsValid()
+	pbms.MergeTwoLists()
 }
 
