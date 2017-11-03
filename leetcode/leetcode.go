@@ -66,5 +66,6 @@ func main() {
 	pbms.RemoveNthFromEnd()
 	pbms.IsValid()
 	pbms.MergeTwoLists()
+	pbms.SumNumbers()
 }
 
