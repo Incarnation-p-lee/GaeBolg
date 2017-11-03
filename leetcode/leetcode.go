@@ -60,5 +60,8 @@ func main() {
 	pbms.ThreeSum()
 	pbms.ThreeSumClosest()
 	pbms.FourSum()
+	pbms.RemoveNthFromEnd()
+	pbms.IsValid()
+	pbms.MergeTwoLists()
 }
 
