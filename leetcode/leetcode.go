@@ -60,5 +60,6 @@ func main() {
 	pbms.MaxPathSum()
 	pbms.LongestCommonPrefix()
 	pbms.ThreeSum()
+	pbms.FindLadders()
 }
 
