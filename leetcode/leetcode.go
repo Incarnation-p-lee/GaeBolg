@@ -58,5 +58,7 @@ func main() {
 	pbms.MyAtoi()
 	pbms.LongestCommonPrefix()
 	pbms.ThreeSum()
+	pbms.ThreeSumClosest()
+	pbms.FourSum()
 }
 
