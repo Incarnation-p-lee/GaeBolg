@@ -68,5 +68,6 @@ func main() {
 	pbms.MergeTwoLists()
 	pbms.SumNumbers()
 	pbms.Solve()
+	pbms.Partition()
 }
 
