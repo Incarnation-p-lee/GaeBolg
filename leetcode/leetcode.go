@@ -69,5 +69,9 @@ func main() {
 	pbms.SumNumbers()
 	pbms.Solve()
 	pbms.Partition()
+	pbms.MergeKLists()
+	pbms.SwapPairs()
+	pbms.ReverseKGroup()
+	pbms.RemoveDuplicates()
 }
 
