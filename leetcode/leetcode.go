@@ -73,5 +73,8 @@ func main() {
 	pbms.SwapPairs()
 	pbms.ReverseKGroup()
 	pbms.RemoveDuplicates()
+	pbms.RemoveElement()
+	pbms.StrStr()
+	pbms.Divide()
 }
 
