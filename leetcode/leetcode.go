@@ -78,5 +78,6 @@ func main() {
 	pbms.Divide()
 	pbms.NextPermutation()
 	pbms.LongestValidParentheses()
+	pbms.Search()
 }
 
