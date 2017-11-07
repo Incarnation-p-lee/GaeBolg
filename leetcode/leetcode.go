@@ -76,5 +76,7 @@ func main() {
 	pbms.RemoveElement()
 	pbms.StrStr()
 	pbms.Divide()
+	pbms.NextPermutation()
+	pbms.LongestValidParentheses()
 }
 
