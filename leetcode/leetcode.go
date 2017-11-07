@@ -79,5 +79,6 @@ func main() {
 	pbms.NextPermutation()
 	pbms.LongestValidParentheses()
 	pbms.Search()
+	pbms.SearchRange()
 }
 
