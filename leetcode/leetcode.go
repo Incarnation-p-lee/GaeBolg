@@ -76,5 +76,6 @@ func main() {
 	pbms.RemoveElement()
 	pbms.StrStr()
 	pbms.Divide()
+	pbms.Search()
 }
 
