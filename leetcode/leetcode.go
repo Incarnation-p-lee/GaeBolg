@@ -1,6 +1,5 @@
 package main
 
-import "fmt"
 import "os"
 import "log"
 import "runtime/pprof"
@@ -16,8 +15,6 @@ func main() {
 		pprof.StartCPUProfile(f)
 		defer pprof.StopCPUProfile()
 	}
-
-	fmt.Println("Hello, Leetcode!")
 
 	pbms.LetterCombination()
 	pbms.GenerateParenthesis()
@@ -84,5 +81,6 @@ func main() {
 	pbms.IsValidSudoku()
 	pbms.CountAndSay()
 	pbms.FirstMissingPositive()
+	pbms.Trap()
 }
 
