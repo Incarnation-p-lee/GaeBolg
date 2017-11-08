@@ -80,5 +80,9 @@ func main() {
 	pbms.LongestValidParentheses()
 	pbms.Search()
 	pbms.SearchRange()
+	pbms.SearchInsert()
+	pbms.IsValidSudoku()
+	pbms.CountAndSay()
+	pbms.FirstMissingPositive()
 }
 
