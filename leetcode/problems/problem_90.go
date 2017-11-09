@@ -29,30 +29,30 @@ func subsetsWithDup(nums []int) [][]int {
 	subsetsWithDupDfs(nums, 0, true, &buf, &out)
 
 	sort.Slice(out, func (a, b int) bool {
-			var sz int
-			la := len(out[a])
-			lb := len(out[b])
+		var sz int
+		la := len(out[a])
+		lb := len(out[b])
 
-			if la > lb {
-				sz = lb
-			} else {
-				sz = la
-			}
+		if la > lb {
+			sz = lb
+		} else {
+			sz = la
+		}
 
-			for i := 0; i < sz; i++ {
-				if out[a][i] < out[b][i] {
-					return true
-				} else if out[a][i] > out[b][i] {
-					return false
-				}
-			}
-
-			if la < lb {
+		for i := 0; i < sz; i++ {
+			if out[a][i] < out[b][i] {
 				return true
-			} else {
+			} else if out[a][i] > out[b][i] {
 				return false
 			}
-		})
+		}
+
+		if la < lb {
+			return true
+		} else {
+			return false
+		}
+	})
 
 	return out 
 }

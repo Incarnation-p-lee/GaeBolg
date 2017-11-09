@@ -82,5 +82,8 @@ func main() {
 	pbms.CountAndSay()
 	pbms.FirstMissingPositive()
 	pbms.Trap()
+	pbms.Rotate()
+	pbms.Jump()
+	pbms.GroupAnagrams()
 }
 
