@@ -82,5 +82,6 @@ func main() {
 	pbms.CountAndSay()
 	pbms.FirstMissingPositive()
 	pbms.Trap()
+	pbms.Multiply()
 }
 
