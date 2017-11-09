@@ -86,5 +86,7 @@ func main() {
 	pbms.Rotate()
 	pbms.Jump()
 	pbms.GroupAnagrams()
+	pbms.MyPow()
+	pbms.MaxSubArray()
 }
 
