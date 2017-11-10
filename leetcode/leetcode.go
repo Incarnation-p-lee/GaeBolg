@@ -85,5 +85,7 @@ func main() {
 	pbms.Rotate()
 	pbms.Jump()
 	pbms.GroupAnagrams()
+	pbms.CanJump()
+	pbms.Merge()
 }
 

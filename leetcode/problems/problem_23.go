@@ -2,11 +2,6 @@ package problems
 
 import "fmt"
 
-type minHeap struct {
-	Size int
-	Array []*ListNode
-}
-
 func minHeapCreate(size int) * minHeap {
 	var heap *minHeap
 
