@@ -88,5 +88,7 @@ func main() {
 	pbms.GroupAnagrams()
 	pbms.MyPow()
 	pbms.MaxSubArray()
+	pbms.SpiralOrder()
+	pbms.LengthOfLastWord()
 }
 
