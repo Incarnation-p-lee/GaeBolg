@@ -2,11 +2,6 @@ package problems
 
 import "fmt"
 
-type ListNode struct {
-    Val int
-    Next *ListNode
-}
-
 func appendTail(last *ListNode, l *ListNode, carry bool) {
 	for ; l != nil; l = l.Next {
 		v := l.Val

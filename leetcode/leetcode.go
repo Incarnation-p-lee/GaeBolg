@@ -90,5 +90,7 @@ func main() {
 	pbms.MaxSubArray()
 	pbms.SpiralOrder()
 	pbms.LengthOfLastWord()
+	pbms.CanJump()
+	pbms.Merge()
 }
 
