@@ -53,7 +53,7 @@ func merge(itl []Interval) []Interval {
 }
 
 func Merge() {
-	data := []Interval{{2, 3}, {4, 5}, {6, 7}, {1, 10}}
+	data := []Interval{{2, 3}, {4, 5}, {6, 7}, {1, 10}, {11, 12}, {12, 12}}
 
 	fmt.Printf("<056> ")
 	fmt.Println(merge(data))

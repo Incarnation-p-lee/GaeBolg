@@ -92,5 +92,8 @@ func main() {
 	pbms.LengthOfLastWord()
 	pbms.CanJump()
 	pbms.Merge()
+	pbms.Insert()
+	pbms.GenerateMatrix()
+	pbms.RotateRight()
 }
 
