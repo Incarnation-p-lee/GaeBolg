@@ -95,5 +95,12 @@ func main() {
 	pbms.Insert()
 	pbms.GenerateMatrix()
 	pbms.RotateRight()
+	pbms.UniquePaths()
+	pbms.UniquePathsWithObstacles()
+	pbms.MinPathSum()
+	pbms.IsNumber()
+	pbms.PlusOne()
+	pbms.AddBinary()
+	pbms.MySqrt()
 }
 
