@@ -102,5 +102,7 @@ func main() {
 	pbms.PlusOne()
 	pbms.AddBinary()
 	pbms.MySqrt()
+	pbms.ClimbStairs()
+	pbms.SimplifyPath()
 }
 
