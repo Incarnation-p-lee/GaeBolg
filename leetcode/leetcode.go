@@ -104,5 +104,7 @@ func main() {
 	pbms.MySqrt()
 	pbms.ClimbStairs()
 	pbms.SimplifyPath()
+	pbms.SetZeroes()
+	pbms.MinDistance()
 }
 
