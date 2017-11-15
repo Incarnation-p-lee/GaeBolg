@@ -106,5 +106,6 @@ func main() {
 	pbms.SimplifyPath()
 	pbms.SearchMatrix()
 	pbms.SortColors()
+	pbms.MinWindow()
 }
 
