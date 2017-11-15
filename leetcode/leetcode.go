@@ -107,5 +107,7 @@ func main() {
 	pbms.SearchMatrix()
 	pbms.SortColors()
 	pbms.MinWindow()
+	pbms.SetZeroes()
+	pbms.MinDistance()
 }
 
