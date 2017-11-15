@@ -109,5 +109,6 @@ func main() {
 	pbms.MinWindow()
 	pbms.SetZeroes()
 	pbms.MinDistance()
+	pbms.Search2()
 }
 
