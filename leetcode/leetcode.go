@@ -110,5 +110,7 @@ func main() {
 	pbms.SetZeroes()
 	pbms.MinDistance()
 	pbms.Search2()
+	pbms.DeleteDuplicates()
+	pbms.LargestRectangleArea()
 }
 
