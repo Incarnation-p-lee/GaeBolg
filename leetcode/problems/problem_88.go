@@ -4,41 +4,31 @@ import "fmt"
 
 func mergeSortedArray(nums1 []int, m int, nums2 []int, n int) {
 	n1, n2 := nums1, nums2
+	k := m + n - 1
+	i, j := m - 1, n - 1
 
-	if m == 0 || len(n1) == 0 {
-		return
-	} else if n == 0 || len(n2) == 0 {
-		return
-	}
-
-	d := make([]int, m)
-	copy(d, n1)
-
-	k := 0
-	i, j := 0, 0
-
-	for i < m && j < n {
-		if d[i] < n2[j] {
-			n1[k] = d[i]
-			k++
-			i++
-		} else {
+	for i >= 0 && j >= 0 {
+		if n1[i] < n2[j] {
 			n1[k] = n2[j]
-			k++
-			j++
+			j--
+		} else {
+			n1[k] = n1[i]
+			i--
 		}
+
+		k--
 	}
 
-	for i < m {
-		n1[k] = d[i]
-		k++
-		i++
+	for i >= 0 {
+		n1[k] = n1[i]
+		k--
+		i--
 	}
 
-	for j < n {
+	for j >= 0 {
 		n1[k] = n2[j]
-		k++
-		j++
+		k--
+		j--
 	}
 }
 
