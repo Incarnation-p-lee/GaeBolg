@@ -21,3 +21,7 @@ type minHeap struct {
 	Array []*ListNode
 }
 
+type Point struct {
+	X, Y int
+}
+

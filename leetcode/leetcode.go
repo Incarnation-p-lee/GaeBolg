@@ -112,5 +112,7 @@ func main() {
 	pbms.Search2()
 	pbms.DeleteDuplicates()
 	pbms.LargestRectangleArea()
+	pbms.MergeSortedArray()
+	pbms.MaximalRectangle()
 }
 
