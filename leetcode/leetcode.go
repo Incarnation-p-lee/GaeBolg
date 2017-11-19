@@ -116,5 +116,8 @@ func main() {
 	pbms.MaximalRectangle()
 	pbms.PartitionList()
 	pbms.NumDecodings()
+	pbms.ReverseBetween()
+	pbms.InorderTraversal()
+	pbms.NumTrees()
 }
 
