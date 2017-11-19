@@ -114,5 +114,7 @@ func main() {
 	pbms.LargestRectangleArea()
 	pbms.MergeSortedArray()
 	pbms.MaximalRectangle()
+	pbms.PartitionList()
+	pbms.NumDecodings()
 }
 
