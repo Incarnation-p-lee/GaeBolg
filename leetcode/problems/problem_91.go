@@ -6,43 +6,18 @@ import "strconv"
 func numDecodings(s string) int {
 	n := len(s)
 	data := []byte(s)
-	dp := make([]int, n + 1)
 
-	if len(s) == 0 {
+	if len(data) == 0 || data[0] == '0' {
 		return 0
-	} else if len(s) == 1 && s == "0" {
-		return 0
-	} else if len(s) == 1 {
-		return 1
 	}
 
-	dp[0] = 1
-	d, _ := strconv.Atoi(string(data[:2]))
+	dp0, dp1, dp2 := 1, 1, 1
 
-	if data[0] == '0' {
-		return 0
-	} else {
-		dp[1] = 1
-	}
-
-	if d < 10 {
-		return 0
-	} else if data[1] == '0' {
-		if d == 10 || d == 20 {
-			dp[2] = 1
-		} else {
-			return 0
-		}
-	} else if d > 26 {
-		dp[2] = 1
-	} else {
-		dp[2] = 2
-	}
-
-	for i := 2; i < n; i++ {
+	for i := 1; i < n; i++ {
+		dp := 0
 		if data[i] == '0' {
-			if data[i - 1] <= '2' && data[i - 1] > '0' {
-				dp[i + 1] = dp[i - 1]
+			if data[i - 1] == '2' || data[i - 1] == '1' {
+				dp = dp1
 			} else {
 				return 0
 			}
@@ -50,20 +25,22 @@ func numDecodings(s string) int {
 			d, _ := strconv.Atoi(string(data[i - 1:i + 1]))
 
 			if d > 26 {
-				dp[i + 1] = dp[i]
+				dp = dp2
 			} else if d < 10 {
-				if data[i - 2] <= '2' && data[i - 2] > '0' {
-					dp[i + 1] = dp[i - 2]
+				if data[i - 2] == '2' || data[i - 2] == '1' {
+					dp = dp0
 				} else {
 					return 0
 				}
 			} else {
-				dp[i + 1] = dp[i] + dp[i - 1]
+				dp = dp2 + dp1
 			}
 		}
+
+		dp0, dp1, dp2 = dp1, dp2, dp
 	}
 
-	return dp[n]
+	return dp2
 }
 
 func NumDecodings() {
