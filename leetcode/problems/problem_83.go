@@ -2,7 +2,7 @@ package problems
 
 import "fmt"
 
-func deleteDuplicates(head *ListNode) *ListNode {
+func deleteDuplicates2(head *ListNode) *ListNode {
 	if head == nil {
 		return nil
 	}
@@ -28,7 +28,7 @@ func deleteDuplicates(head *ListNode) *ListNode {
 	return faker.Next
 }
 
-func DeleteDuplicates() {
+func DeleteDuplicates2() {
 	var l1, l2, l3, l4, l5, l6, l7 ListNode
 
 	l1.Val, l2.Val, l3.Val, l4.Val, l5.Val, l6.Val, l7.Val = 1, 1, 3, 4, 5, 5, 7
@@ -36,6 +36,6 @@ func DeleteDuplicates() {
 	l5.Next, l6.Next, l7.Next = &l6, &l7, nil
 
 	fmt.Printf("<083> ")
-	fmt.Println(deleteDuplicates(&l1))
+	fmt.Println(deleteDuplicates2(&l1))
 }
 

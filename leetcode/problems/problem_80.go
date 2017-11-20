@@ -26,8 +26,6 @@ func removeDuplicates2(nums []int) int {
 		k++
 	}
 
-	fmt.Println(d)
-
 	return k
 }
 
