@@ -111,5 +111,6 @@ func main() {
 	pbms.MinDistance()
 	pbms.RemoveDuplicates2()
 	pbms.Search2()
+	pbms.DeleteDuplicates()
 }
 
