@@ -122,5 +122,6 @@ func main() {
 	pbms.InorderTraversal()
 	pbms.NumTrees()
 	pbms.IsInterleave()
+	pbms.GenerateTrees()
 }
 

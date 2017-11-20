@@ -35,7 +35,7 @@ func isInterleaveRecursive(s1 string, s2 string, s3 string) bool {
  * s1 = "ab", s2 = "aa", s3 = "abaa"
  *       | a | a |
  *   +---+---+---+
- *   | 0 | 1 | 0 |
+ *   | 1 | 1 | 0 |
  * --+---+---+---+
  * a | 1 | 0 | 0 |
  * --+---+---+---+
@@ -73,19 +73,16 @@ func isInterleaveDp(s1 string, s2 string, s3 string) bool {
 		}
 	}
 
-	for i := 1; i <= len(b1); i++ {
-		vb1 := b1[i - 1]
-		for j := 1; j <= len(b2); j++ {
-			vb2 := b2[j - 1]
-			k := i + j
-			vb3 := b3[k - 1]
+	for i, vb1 := range b1 {
+		for j, vb2 := range b2 {
+			vb3 := b3[i + j + 1]
 
-			if vb3 == vb1 {
-				dp[i][j] = dp[i - 1][j] || dp[i][j]
+			if vb3 == vb1 && dp[i][j + 1] {
+				dp[i + 1][j + 1] = true
 			}
 
-			if vb3 == vb2 {
-				dp[i][j] = dp[i][j - 1] || dp[i][j] 
+			if vb3 == vb2 && dp[i + 1][j] {
+				dp[i + 1][j + 1] = true
 			}
 		}
 	}
@@ -98,6 +95,6 @@ func IsInterleave() {
 	fmt.Println(isInterleaveRecursive("aa", "ab", "abaa"))
 
 	fmt.Printf("<097> ")
-	fmt.Println(isInterleaveDp("aa", "ab", "aaab"))
+	fmt.Println(isInterleaveDp("ab", "aa", "abaa"))
 }
 
