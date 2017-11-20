@@ -112,5 +112,13 @@ func main() {
 	pbms.RemoveDuplicates2()
 	pbms.Search2()
 	pbms.DeleteDuplicates()
+	pbms.LargestRectangleArea()
+	pbms.MergeSortedArray()
+	pbms.MaximalRectangle()
+	pbms.PartitionList()
+	pbms.NumDecodings()
+	pbms.ReverseBetween()
+	pbms.InorderTraversal()
+	pbms.NumTrees()
 }
 
