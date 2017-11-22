@@ -125,5 +125,9 @@ func main() {
 	pbms.GenerateTrees()
 	pbms.NumDistinct()
 	pbms.Generate()
+	pbms.GetRow()
+	pbms.MinimumTotal()
+	pbms.MaxProfit()
+	pbms.MaxProfit2()
 }
 
