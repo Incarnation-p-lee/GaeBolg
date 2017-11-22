@@ -124,5 +124,9 @@ func main() {
 	pbms.IsInterleave()
 	pbms.GenerateTrees()
 	pbms.NumDistinct()
+	pbms.GetRow()
+	pbms.MinimumTotal()
+	pbms.MaxProfit()
+	pbms.MaxProfit2()
 }
 
