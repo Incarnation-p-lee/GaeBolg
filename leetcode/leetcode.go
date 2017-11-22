@@ -124,5 +124,6 @@ func main() {
 	pbms.IsInterleave()
 	pbms.GenerateTrees()
 	pbms.NumDistinct()
+	pbms.Generate()
 }
 
