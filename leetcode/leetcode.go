@@ -128,5 +128,6 @@ func main() {
 	pbms.MinimumTotal()
 	pbms.MaxProfit()
 	pbms.MaxProfit2()
+	pbms.IsPalindrome()
 }
 
