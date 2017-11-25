@@ -63,7 +63,7 @@ func maxProfit3(prices []int) int {
 }
 
 func MaxProfit3() {
-	fmt.Printf("<125> ")
+	fmt.Printf("<123> ")
 	fmt.Println(maxProfit3([]int{1, 5, 1, 9, 3}))
 }
 

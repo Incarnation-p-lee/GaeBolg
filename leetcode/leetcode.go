@@ -131,5 +131,6 @@ func main() {
 	pbms.MaxProfit2()
 	pbms.IsPalindrome()
 	pbms.MaxProfit3()
+	pbms.LadderLength()
 }
 
