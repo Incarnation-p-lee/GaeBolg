@@ -132,5 +132,7 @@ func main() {
 	pbms.IsPalindrome()
 	pbms.MaxProfit3()
 	pbms.LadderLength()
+	pbms.CanCompleteCircuit()
+	pbms.Candy()
 }
 
