@@ -134,5 +134,7 @@ func main() {
 	pbms.LadderLength()
 	pbms.LongestConsecutive()
 	pbms.MinCut()
+	pbms.CanCompleteCircuit()
+	pbms.Candy()
 }
 
