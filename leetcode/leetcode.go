@@ -136,5 +136,7 @@ func main() {
 	pbms.MinCut()
 	pbms.CanCompleteCircuit()
 	pbms.Candy()
+	pbms.SingleNumber()
+	pbms.SingleNumber2()
 }
 
