@@ -138,5 +138,7 @@ func main() {
 	pbms.Candy()
 	pbms.SingleNumber()
 	pbms.SingleNumber2()
+	pbms.WordBreak()
+	pbms.WordBreak2()
 }
 
