@@ -140,5 +140,9 @@ func main() {
 	pbms.SingleNumber2()
 	pbms.WordBreak()
 	pbms.WordBreak2()
+	pbms.ReorderList()
+	pbms.PreorderTraversal()
+	pbms.PostorderTraversal()
+	pbms.LRUCacheSample()
 }
 
