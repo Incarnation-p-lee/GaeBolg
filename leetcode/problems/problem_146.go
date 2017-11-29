@@ -3,32 +3,34 @@ package problems
 import "fmt"
 
 type DListNode struct {
-	Val int
+	Val, Key int
 	Prev, Next *DListNode
 }
 
 type LRUCache struct {
+	Head *DListNode
 	lmap map[int]*DListNode
-	Head DListNode
 }
 
 func Constructor(capacity int) LRUCache {
-	var cache LRUCache
+	cache := new(LRUCache)
 
 	cache.lmap = make(map[int]*DListNode)
-	h := &cache.Head
+	cache.Head = new(DListNode)
+	cache.Head.Prev, cache.Head.Next = cache.Head, cache.Head
+	h := cache.Head
 
 	for i := 0; i < capacity; i++ {
 		node := new(DListNode)
-		h.Next = node
+
+		node.Next = h.Next
 		node.Prev = h
-		h = h.Next
+
+		h.Next.Prev = node
+		h.Next = node
 	}
 
-	h.Next = &cache.Head
-	cache.Head.Prev = h
-
-	return cache
+	return *cache
 }
 
 func insertToFirst(head, node *DListNode) {
@@ -64,26 +66,38 @@ func (this *LRUCache) Get(key int) int {
 	}
 
 	node := v
-	insertToFirst(&this.Head, node)
-
-	fmt.Println(this.lmap)
+	insertToFirst(this.Head, node)
 
 	return v.Val
 }
-
 
 func (this *LRUCache) Put(key int, value int)  {
 	if this == nil {
 		return
 	} 
 
-	_, ok := this.lmap[key]
+	node, ok := this.lmap[key]
 
-	last := this.Head.Prev
-	last.Val = value
-	insertToFirst(&this.Head, last)
+	if ok {
+		delete(this.lmap, key)
 
-	if !ok {
+		node.Key, node.Val = key, value
+		insertToFirst(this.Head, node)
+
+		this.lmap[key] = node
+	} else {
+		last := this.Head.Prev
+		oldKey := last.Key
+
+		_, ok := this.lmap[oldKey]
+
+		if ok {
+			delete(this.lmap, oldKey)
+		}
+
+		last.Key, last.Val = key, value
+		insertToFirst(this.Head, last)
+
 		this.lmap[key] = last
 	}
 }
@@ -92,17 +106,14 @@ func LRUCacheSample() {
 	cache := Constructor(2)
 	fmt.Printf("<146> ")
 
-	cache.Put(1, 1)
-	cache.Put(2, 2)
-	fmt.Printf("%d ", cache.Get(1))
-
-	cache.Put(3, 3)
 	fmt.Printf("%d ", cache.Get(2))
-
-	cache.Put(4, 4)
+	cache.Put(2, 6)
 	fmt.Printf("%d ", cache.Get(1))
-	fmt.Printf("%d ", cache.Get(3))
-	fmt.Printf("%d ", cache.Get(4))
+
+	cache.Put(1, 5)
+	cache.Put(1, 2)
+	fmt.Printf("%d ", cache.Get(1))
+	fmt.Printf("%d ", cache.Get(2))
 
 	fmt.Println()
 }
