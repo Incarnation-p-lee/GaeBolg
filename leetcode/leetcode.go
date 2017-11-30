@@ -144,5 +144,7 @@ func main() {
 	pbms.PreorderTraversal()
 	pbms.PostorderTraversal()
 	pbms.LRUCacheSample()
+	pbms.InsertionSortList()
+	pbms.SortList()
 }
 
