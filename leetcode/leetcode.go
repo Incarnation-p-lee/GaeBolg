@@ -146,5 +146,7 @@ func main() {
 	pbms.LRUCacheSample()
 	pbms.InsertionSortList()
 	pbms.SortList()
+	pbms.MaxPoints()
+	pbms.EvalRPN()
 }
 
