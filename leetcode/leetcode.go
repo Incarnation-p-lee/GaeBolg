@@ -148,5 +148,8 @@ func main() {
 	pbms.SortList()
 	pbms.MaxPoints()
 	pbms.EvalRPN()
+	pbms.MaxProduct()
+	pbms.FindMin()
+	pbms.FindMinDuplicated()
 }
 
