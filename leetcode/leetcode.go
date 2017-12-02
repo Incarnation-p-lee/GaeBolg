@@ -151,5 +151,7 @@ func main() {
 	pbms.MaxProduct()
 	pbms.FindMin()
 	pbms.FindMinDuplicated()
+	pbms.MinStackSample()
+	pbms.FindPeakElement()
 }
 
