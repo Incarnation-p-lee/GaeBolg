@@ -153,5 +153,6 @@ func main() {
 	pbms.FindMinDuplicated()
 	pbms.MinStackSample()
 	pbms.FindPeakElement()
+	pbms.CompareVersion()
 }
 
