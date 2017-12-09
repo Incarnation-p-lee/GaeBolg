@@ -154,5 +154,6 @@ func main() {
 	pbms.MinStackSample()
 	pbms.FindPeakElement()
 	pbms.CompareVersion()
+	pbms.MaximumGap()
 }
 
