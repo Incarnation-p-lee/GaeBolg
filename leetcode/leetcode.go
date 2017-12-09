@@ -155,5 +155,6 @@ func main() {
 	pbms.FindPeakElement()
 	pbms.CompareVersion()
 	pbms.MaximumGap()
+	pbms.FractionToDecimal()
 }
 
