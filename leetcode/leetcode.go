@@ -156,5 +156,8 @@ func main() {
 	pbms.CompareVersion()
 	pbms.MaximumGap()
 	pbms.FractionToDecimal()
+	pbms.TwoSumSorted()
+	pbms.ConvertToTitle()
+	pbms.MajorityElement()
 }
 
