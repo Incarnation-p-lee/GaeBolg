@@ -159,5 +159,9 @@ func main() {
 	pbms.TwoSumSorted()
 	pbms.ConvertToTitle()
 	pbms.MajorityElement()
+	pbms.TitleToNumber()
+	pbms.TrailingZeroes()
+	pbms.CalculateMinimumHP()
+	pbms.LargestNumber()
 }
 
