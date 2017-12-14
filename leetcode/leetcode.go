@@ -163,5 +163,6 @@ func main() {
 	pbms.TrailingZeroes()
 	pbms.CalculateMinimumHP()
 	pbms.LargestNumber()
+	pbms.FindRepeatedDnaSequences()
 }
 
