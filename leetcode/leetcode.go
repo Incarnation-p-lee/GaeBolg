@@ -164,5 +164,6 @@ func main() {
 	pbms.CalculateMinimumHP()
 	pbms.LargestNumber()
 	pbms.FindRepeatedDnaSequences()
+	pbms.MaxProfit4()
 }
 

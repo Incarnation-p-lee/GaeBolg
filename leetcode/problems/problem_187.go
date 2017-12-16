@@ -12,8 +12,6 @@ func findRepeatedDnaSequences(s string) []string {
 	out := make([]string, 0)
 	smap := make(map[string]int)
 
-	fmt.Println(len(d))
-
 	for i := 0; i + 9 < len(d); i++ {
 		cad := string(d[i:i + 10])
 
