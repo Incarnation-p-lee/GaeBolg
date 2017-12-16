@@ -165,5 +165,6 @@ func main() {
 	pbms.LargestNumber()
 	pbms.FindRepeatedDnaSequences()
 	pbms.MaxProfit4()
+	pbms.RotateArray()
 }
 
