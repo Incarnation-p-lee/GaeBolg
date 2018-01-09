@@ -5,12 +5,14 @@ import "fmt"
 import "os/exec"
 import "strconv"
 
-var adbBinary string = "adb"
-var cmdScreenshot string = "screencap"
-var cmdShell string = "shell"
-var cmdLs string = "ls"
-var cmdPull string = "pull"
-var pngCount int = 0
+var adbBinary 		string = "adb"
+var cmdScreenshot 	string = "screencap"
+var cmdShell 		string = "shell"
+var cmdLs 			string = "ls"
+var cmdPull 		string = "pull"
+var cmdInput 		string = "input"
+var cmdSwipe 		string = "swipe"
+var pngCount 		int = 0
 
 func pngCountGet() int {
 	return pngCount
@@ -20,7 +22,7 @@ func pngCountAdvance() {
 	pngCount++
 }
 
-func AdbScreenshot() string {
+func Screenshot() string {
 	cmd := adbBinary
 	args := make([]string, 0)
 
@@ -29,29 +31,44 @@ func AdbScreenshot() string {
 	cmdArgs := "-p"
 
 	/* adb shell screencap -p > xxx.png */
-	args = append(args, cmdShell);
-	args = append(args, cmdScreenshot)
-	args = append(args, cmdArgs)
-	args = append(args, tmpPng)
+	args = append(args, cmdShell, cmdScreenshot, cmdArgs, tmpPng);
 
 	if err := exec.Command(cmd, args...).Run(); err != nil {
-		fmt.Println(os.Stderr, err)
+		fmt.Println(err)
 		os.Exit(1)
 	}
 
 	args = args[:0]
 
 	/* adb pull xxx.png yyy.png */
-	args = append(args, cmdPull)
-	args = append(args, tmpPng)
-	args = append(args, outPng)
+	args = append(args, cmdPull, tmpPng, outPng)
 
 	if err := exec.Command(cmd, args...).Run(); err != nil {
-		fmt.Println(os.Stderr, err)
+		fmt.Println(err)
 		os.Exit(1)
 	}
 
 	pngCountAdvance()
 	return outPng
+}
+
+func Press(ms int) {
+	if ms < 0 {
+		fmt.Println("Cannot press negative ms!")
+		return
+	}
+
+	loc := "1"
+	cmd := adbBinary
+	args := make([]string, 0)
+
+	/* adb shell input swipe 1 1 1 1 1000 */
+	args = append(args, cmdShell, cmdInput, cmdSwipe)
+	args = append(args, loc, loc, loc, loc, strconv.Itoa(ms))
+
+	if err := exec.Command(cmd, args...).Run(); err != nil {
+		fmt.Println(err)
+		os.Exit(1)
+	}
 }
 

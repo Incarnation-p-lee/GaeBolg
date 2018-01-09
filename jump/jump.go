@@ -7,7 +7,8 @@ func main() {
 	fmt.Println("Start Jump Game!")
 
 	for i := 0; i < 10; i++ {
-		adb.AdbScreenshot()
+		adb.Screenshot()
+		adb.Press(500);
 	}
 }
 
