@@ -5,14 +5,14 @@ import "fmt"
 import "os/exec"
 import "strconv"
 
-var adbBinary 		string = "adb"
-var cmdScreenshot 	string = "screencap"
-var cmdShell 		string = "shell"
-var cmdLs 			string = "ls"
-var cmdPull 		string = "pull"
-var cmdInput 		string = "input"
-var cmdSwipe 		string = "swipe"
-var pngCount 		int = 0
+var adbBinary     string = "adb"
+var cmdScreenshot string = "screencap"
+var cmdShell      string = "shell"
+var cmdLs         string = "ls"
+var cmdPull       string = "pull"
+var cmdInput      string = "input"
+var cmdSwipe      string = "swipe"
+var pngCount      int = 0
 
 func pngCountGet() int {
 	return pngCount
@@ -57,6 +57,8 @@ func Press(ms int) {
 		fmt.Println("Cannot press negative ms!")
 		return
 	}
+
+	fmt.Printf("Press %d ms.\n", ms)
 
 	loc := "1"
 	cmd := adbBinary
