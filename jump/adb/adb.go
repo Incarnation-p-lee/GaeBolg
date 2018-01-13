@@ -5,14 +5,15 @@ import "fmt"
 import "os/exec"
 import "strconv"
 
-var adbBinary     string = "adb"
+var adbBinary string = "adb"
 var cmdScreenshot string = "screencap"
-var cmdShell      string = "shell"
-var cmdLs         string = "ls"
-var cmdPull       string = "pull"
-var cmdInput      string = "input"
-var cmdSwipe      string = "swipe"
-var pngCount      int = 0
+var cmdShell string = "shell"
+var cmdLs string = "ls"
+var cmdPull string = "pull"
+var cmdInput string = "input"
+var cmdSwipe string = "swipe"
+var pngCount int = 0
+var countMax int = 100
 
 func pngCountGet() int {
 	return pngCount
@@ -20,6 +21,10 @@ func pngCountGet() int {
 
 func pngCountAdvance() {
 	pngCount++
+
+	if pngCount > countMax {
+		pngCount = 0
+	}
 }
 
 func Screenshot() string {
@@ -31,7 +36,7 @@ func Screenshot() string {
 	cmdArgs := "-p"
 
 	/* adb shell screencap -p > xxx.png */
-	args = append(args, cmdShell, cmdScreenshot, cmdArgs, tmpPng);
+	args = append(args, cmdShell, cmdScreenshot, cmdArgs, tmpPng)
 
 	if err := exec.Command(cmd, args...).Run(); err != nil {
 		fmt.Println(err)
@@ -73,4 +78,3 @@ func Press(ms int) {
 		os.Exit(1)
 	}
 }
-
