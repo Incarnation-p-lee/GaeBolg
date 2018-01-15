@@ -13,6 +13,7 @@ var targetRatio float64 = 0.09792
 var targetLeftRatio float64 = 0.01823
 var targetColor uint32 = 0x34353b
 var gameOverBackground uint32 = 0x332e2c
+var topMax int = 16
 
 var matrixBuf [][]uint32 = make([][]uint32, 0)
 
@@ -150,7 +151,7 @@ Loop1:
 		}
 	}
 
-	for k = x1; isSameRegion(m[y1][k], m[y1][x1]); k++ {
+	for k = x1; isSameRegion(m[y1][k], m[y1][x1]) && k < (topMax+x1); k++ {
 	}
 
 	last0, last1, r, x1 := 0, 0, ((x1 + k) / 2), ((x1 + k) / 2)
