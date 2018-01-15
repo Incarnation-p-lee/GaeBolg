@@ -13,7 +13,7 @@ var cmdPull string = "pull"
 var cmdInput string = "input"
 var cmdSwipe string = "swipe"
 var pngCount int = 0
-var countMax int = 100
+var countMax int = 10
 
 func pngCountGet() int {
 	return pngCount

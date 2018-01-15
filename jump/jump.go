@@ -9,7 +9,8 @@ func main() {
 	count := 0
 	fmt.Println("Start Jump Game!")
 
-	// screen.Distance("screenshot/screen-5.png")
+	//	screen.Distance("screenshot/screen-1.png")
+	//	return
 
 	for {
 		count++

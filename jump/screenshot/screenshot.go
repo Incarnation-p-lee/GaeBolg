@@ -8,10 +8,25 @@ import _ "image/png"
 import "bufio"
 import "math"
 
-var targetStartY int = 384
-var topToCenter int = 188
-var topToLeft int = 31
+var targetStartRatio float64 = 0.28654
+var targetRatio float64 = 0.09792
+var targetLeftRatio float64 = 0.01823
+var targetColor uint32 = 0x34353b
+var gameOverBackground uint32 = 0x332e2c
+
 var matrixBuf [][]uint32 = make([][]uint32, 0)
+
+func targetStartRow(height int) int {
+	return int(float64(height) * targetStartRatio)
+}
+
+func targetCenterOffset(height int) int {
+	return int(float64(height) * targetRatio)
+}
+
+func targetLeftToCenter(height int) int {
+	return int(float64(height) * targetLeftRatio)
+}
 
 func createRGBAArray(width, height int) [][]uint32 {
 	if width <= 0 || height <= 0 {
@@ -64,10 +79,10 @@ func imageToIntMatrix(path string) [][]uint32 {
 	}
 
 	rect := img.Bounds()
-	fmt.Printf("Decode %s [%d * %d] done.\n", format, rect.Max.X, rect.Max.Y)
-
 	out := createRGBAArray(rect.Max.X, rect.Max.Y)
 	fillRGBAArray(out)
+
+	fmt.Printf("Decode %s [%d * %d] done.\n", format, rect.Max.X, rect.Max.Y)
 
 	return out
 }
@@ -97,15 +112,15 @@ func maxInt(a, b int) int {
 }
 
 func isSameRegion(m, n uint32) bool {
-	var maxdiff uint32 = 25
-	rm, gm, bm := m>>16, (m>>8)&0xff, m&0xff
-	rn, gn, bn := n>>16, (n>>8)&0xff, n&0xff
+	var maxDiff uint32 = 20
+	rm, gm, bm := (m >> 16), ((m >> 8) & 0xff), (m & 0xff)
+	rn, gn, bn := (n >> 16), ((n >> 8) & 0xff), (n & 0xff)
 
-	if absUint32(rm, rn) > maxdiff {
+	if absUint32(rm, rn) > maxDiff {
 		return false
-	} else if absUint32(gm, gn) > maxdiff {
+	} else if absUint32(gm, gn) > maxDiff {
 		return false
-	} else if absUint32(bm, bn) > maxdiff {
+	} else if absUint32(bm, bn) > maxDiff {
 		return false
 	} else {
 		return true
@@ -113,62 +128,47 @@ func isSameRegion(m, n uint32) bool {
 }
 
 func findTargetPoint(matrix [][]uint32, ref uint32, limit int) (int, int) {
-	x1, y1, y2, m := 0, 0, 0, matrix
-
-	if len(m) == 0 || len(m[0]) == 0 {
-		return 0, 0
-	}
+	x1, y1, y2, k, m := 0, 0, 0, 0, matrix
 
 Loop1:
-	for i := targetStartY; i < len(m); i++ {
+	for i := targetStartRow(len(m)); i < len(m); i++ {
 		row := m[i]
 		if limit > (len(m[0]) / 2) { /* Ball on right */
-			for j := 0; j < (limit - topToLeft); j++ {
+			for j := 0; j < (limit - targetLeftToCenter(len(m))); j++ {
 				if isSameRegion(row[j], ref) == false {
 					x1, y1 = j, i
 					break Loop1
 				}
 			}
 		} else { /* Ball on left */
-			for j := limit + topToLeft; j < len(m[0]); j++ {
+			for j := limit + targetLeftToCenter(len(m)); j < len(m[0]); j++ {
 				if isSameRegion(row[j], ref) == false {
 					x1, y1 = j, i
 					break Loop1
 				}
 			}
 		}
-
 	}
 
-	k := x1
-	for isSameRegion(m[y1][k], ref) && k < x1+8 {
-		k++
+	for k = x1; isSameRegion(m[y1][k], m[y1][x1]); k++ {
 	}
 
-	widthMax, l, r := 0, x1, k
+	last0, last1, r, x1 := 0, 0, ((x1 + k) / 2), ((x1 + k) / 2)
 
 	for i := y1; i < len(m); i++ {
-		isLeftSame, isRightSame := false, false
-		for l >= 0 && r < len(m[0]) {
-			isLeftSame = isSameRegion(m[i][l], ref)
-			isRightSame = isSameRegion(m[i][r], ref)
-
-			if isLeftSame && isRightSame {
+		for ; r < len(m[0]); r++ {
+			if isSameRegion(m[i][r], ref) {
 				break
-			}
-			if !isLeftSame {
-				l--
-			}
-			if !isRightSame {
-				r++
 			}
 		}
 
-		if (r - l) == widthMax {
+		if ((r - x1) == last0) && last0 == last1 {
 			y2 = i
 			break
 		}
-		widthMax = r - l
+
+		last0 = last1
+		last1 = r - x1
 	}
 
 	fmt.Printf("Target [%d, %d]\n", x1, y2)
@@ -176,13 +176,16 @@ Loop1:
 }
 
 func isBlackMain(v uint32) bool {
-	r, g, b := v>>16, (v>>8)&0xff, v&0xff
+	maxDiff := uint32(1)
+	r, g, b := (v >> 16), ((v >> 8) & 0xff), (v & 0xff)
+	rt, gt, bt := (targetColor >> 16), ((targetColor >> 8) & 0xff),
+		(targetColor & 0xff)
 
-	if r != 0x34 {
+	if absUint32(r, rt) > maxDiff {
 		return false
-	} else if g != 0x35 {
+	} else if absUint32(g, gt) > maxDiff {
 		return false
-	} else if b != 0x3b {
+	} else if absUint32(b, bt) > maxDiff {
 		return false
 	} else {
 		return true
@@ -192,53 +195,48 @@ func isBlackMain(v uint32) bool {
 func findSourcePoint(matrix [][]uint32, ref uint32) (int, int) {
 	m := matrix
 
-	if len(m) == 0 || len(m[0]) == 0 {
-		return 0, 0
-	}
-
 	x1, y1 := 0, 0
 
 Loop1:
-	for i := targetStartY; i < len(m); i++ {
+	for i := targetStartRow(len(m)); i < len(m); i++ {
 		row := m[i]
 		for j, v := range row {
 			if isBlackMain(v) {
-				x1, y1 = j+5, i
+				x1, y1 = (j + 5), i
 				break Loop1
 			}
 		}
 	}
 
-	y1 += topToCenter
+	y1 += targetCenterOffset(len(m))
 
 	fmt.Printf("Source [%d, %d]\n", x1, y1)
 
 	return x1, y1
 }
 
-func computeDistance(matrix [][]uint32) int {
-	m := matrix
+func isGameOver(background uint32) bool {
+	rgb, maxDiff := background, uint32(15)
+	r, g, b := (rgb >> 16), ((rgb >> 8) & 0xff), (rgb & 0xff)
 
-	if len(m) == 0 || len(m[0]) == 0 {
-		return 0
+	if absUint32(r, 0x33) > maxDiff {
+		return false
+	} else if absUint32(g, 0x2d) > maxDiff {
+		return false
+	} else if absUint32(b, 0x26) > maxDiff {
+		return false
+	} else {
+		return true
 	}
+}
 
-	background := func() uint32 {
-		var last uint32
+func computeDistance(matrix [][]uint32) int {
+	background := matrix[targetStartRow(len(matrix))][0]
 
-		for i := 0; i < 5; i++ {
-			row := m[i]
-			for _, v := range row {
-				if last == 0 {
-					last = v
-				} else if v != last {
-					fmt.Println("Mismatched background!")
-				}
-			}
-		}
-
-		return last
-	}()
+	if isGameOver(background) {
+		fmt.Println("Game over!!")
+		os.Exit(0)
+	}
 
 	x1, y1 := findSourcePoint(matrix, background)
 	x2, y2 := findTargetPoint(matrix, background, x1)
@@ -246,10 +244,11 @@ func computeDistance(matrix [][]uint32) int {
 	a := float64(absInt(x1, x2))
 	b := float64(absInt(y1, y2))
 
-	distance := math.Sqrt(a*a + b*b)
-	fmt.Printf("Computed distance %d\n", int(distance))
+	distance := int(math.Sqrt((a * a) + (b * b)))
 
-	return int(distance)
+	fmt.Printf("Computed distance %d\n", distance)
+
+	return distance
 }
 
 func Distance(path string) int {
